@@ -6,10 +6,24 @@ const surveySlice = createSlice({
     reducers: {
         set: (state, action) => {
             return action.payload
+        },
+        add: (state, action) => {
+            return {
+                ...state, questions: [
+                    ...state.questions, {
+                        "id": state.questions[state.questions.length - 1].id + 1,
+                        "question_content": "",
+                        "created_at": null,
+                        "updated_at": null,
+                        "survey_id": 1,
+                        "question_type_id": 1
+                    },
+                ]
+            }
         }
     }
 })
 
-export const { set } = surveySlice.actions
+export const { set, add } = surveySlice.actions
 
 export default surveySlice.reducer

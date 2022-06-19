@@ -5,16 +5,13 @@ import Header from './components/Header';
 import Add_question_card from './components/Add_question_card';
 import store from './redux/store'
 import { Provider, useSelector } from 'react-redux'
+import Survey from './components/Survey';
 function App() {
-  const survey = useSelector(state => state.survey)
   return (
     <Provider store={store}>
       <Router>
         <Header title={"Survey Builder"} />
-        {
-          survey?.questions?.map(question => (<Add_question_card data={question} />))
-        }
-
+        <Survey />
       </Router>
     </Provider>
   );

@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { set } from "../redux/slices/profile";
 import Choices from "./Choices";
 
-const Add_question_card = ({ }) => {
-    const [question, setQuestion] = useState('')
-    const types = ['Text', 'Dropdown', 'Multiple choice', 'Check boxes', 'Date']
-    const [type, setType] = useState(types[0])
+const Add_question_card = ({ data }) => {
+    const types = useSelector(state => state.types)
+    const [question, setQuestion] = useState(data.question_content)
+    const [type, setType] = useState(types?.find(t => t.id === data.question_type_id)?.type)
+    const dispatch = useDispatch()
+
+
+
     return (
         <div className="add-question-card">
             <div className="card-header">
@@ -19,12 +25,12 @@ const Add_question_card = ({ }) => {
                 }}>
                     {
                         types.map(option => (
-                            <option value={option}>{option}</option>
+                            <option value={option.type}>{option.type}</option>
                         ))
                     }
                 </select>
             </div>
-            {type !== 'Text' || type !== 'Date' && <div>
+            {(type !== 'text' && type !== 'date') && <div>
                 <Choices />
             </div>}
 
