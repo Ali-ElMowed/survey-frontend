@@ -1,41 +1,26 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { add, update } from "../redux/slices/choices";
 
-const Choices = ({ }) => {
-    const [choices, setChoices] = useState({ 1: '' })
+const Choices = ({ choices, question_id }) => {
+    const dispatch = useDispatch()
 
-    const handleSetChoice = (e, key) => {
-        setChoices(old => {
-            return {
-                ...old, [key]: e.target.value
-            }
-        })
-    }
-    const addChoice = (key) => {
-        setChoices(old => {
-            return {
-                ...old, [key]: ''
-            }
-        })
-    }
-
-    useEffect(() => {
-        console.log(choices);
-    }, [choices])
     return (
         <div className="choices-container">
             {
-                Object.keys(choices).map((key, index) => (
+                choices.map((choice, index) => (
                     <div>
                         <input
-                            placeholder={`Choice ${key}`}
+                            placeholder={`Choice ${index + 1}`}
                             type="text"
-                            defaultValue={choices[key]}
-                            onChange={(e) => { handleSetChoice(e, key) }}
-                            onFocus={index === Object.keys(choices).length - 1 ? () => { addChoice(parseInt(key) + 1) } : null}
+                            defaultValue={choice.choice_content}
+                            onChange={(e) => { dispatch(update({ ...choice, choice_content: e.target.value })) }}
+                        // onFocus={index === Object.keys(choices).length - 1 ? () => { dispatch(add(choice.question_id)) } : null}
                         />
                     </div>
                 ))
             }
+            <button onClick={() => { dispatch(add(question_id)) }}>add choice</button>
         </div>
     );
 
