@@ -55,7 +55,9 @@ const Survey = ({ title }) => {
             {
                 survey?.questions?.map(question => (<Add_question_card question={question} choices={choices.filter(c => c.question_id === question.id)} />))
             }
-            <Button btn_txt="Add question" onClick={addQuestion} />
+            <div className="add-ques-btn">
+                <Button btn_txt="Add question" onClick={addQuestion} />
+            </div>
         </>
 
     );

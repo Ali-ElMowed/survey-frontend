@@ -32,8 +32,8 @@ const Add_question_card = ({ question, choices }) => {
                         ))
                     }
                 </select>
-            </div>
-            {(type !== 'text' && type !== 'date') && <div>
+            </div >
+            {(type !== 'text' && type !== 'date') && <div className="choice-btn">
                 <Choices choices={choices} question_id={question.id} />
             </div>}
 

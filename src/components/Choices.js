@@ -20,7 +20,7 @@ const Choices = ({ choices, question_id }) => {
                     </div>
                 ))
             }
-            <button onClick={() => { dispatch(add(question_id)) }}>add choice</button>
+            <button onClick={() => { dispatch(add(question_id)) }} className="btn btn-choice">add choice</button>
         </div>
     );
 
