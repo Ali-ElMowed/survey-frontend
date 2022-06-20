@@ -7,6 +7,9 @@ const surveySlice = createSlice({
         set: (state, action) => {
             return action.payload
         },
+        update: (state, action) => {
+            return { ...state, questions: [...state.questions.filter(question => question.id !== action.payload.id), action.payload] }
+        },
         add: (state, action) => {
             return {
                 ...state, questions: [
@@ -24,6 +27,6 @@ const surveySlice = createSlice({
     }
 })
 
-export const { set, add } = surveySlice.actions
+export const { set, add, update } = surveySlice.actions
 
 export default surveySlice.reducer
